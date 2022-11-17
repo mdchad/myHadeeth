@@ -1,0 +1,5 @@
+build
+coverage
+.expo
+.expo-shared
+lib
