@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Alert, Button, TextInput, View} from 'react-native'
+import {Alert, Button, Pressable, Text, TextInput, View} from 'react-native'
 import { supabase } from '../lib/supabase'
 
 export default function Auth() {
@@ -55,11 +55,13 @@ export default function Auth() {
           />
         </View>
         <View className="mt-4">
-          <Button
-              title="Sign in"
+          <Pressable
+              className="bg-amber-800 border-transparent rounded"
               disabled={loading}
               onPress={() => signInWithEmail()}
-          />
+          >
+              <Text className="text-center text-xl text-white">Sign in</Text>
+          </Pressable>
         </View>
         <View>
           <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
