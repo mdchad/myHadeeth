@@ -5,6 +5,7 @@ import { SparklesIcon } from "react-native-heroicons/outline";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
 import Qibla from "./Qibla";
+import Qiblat from "./Qiblat";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ export default function BottomNav() {
       />
       <Tab.Screen
         name="Account"
-        component={Account}
+        component={Qiblat}
         options={{
           tabBarIcon: () => (
             <AntDesign name="setting" size={24} color="black" />

@@ -1,14 +1,13 @@
 import { useState, useEffect, useLayoutEffect } from "react";
-import { supabase } from "../lib/supabase";
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import {
   StyleSheet,
   View,
   Image,
   Text,
-  SafeAreaView,
   ImageBackground,
 } from "react-native";
-import { Button, Input } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import CompassHeading from "react-native-compass-heading";
 import Geolocation from "react-native-geolocation-service";
@@ -69,29 +68,36 @@ export default function Qibla({ session }) {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/kompas.png")}
-        style={[
-          styles.image,
-          { transform: [{ rotate: `${360 - compassHeading}deg` }] },
-        ]}
-      >
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            transform: [{ rotate: `${qiblad}deg` }],
-          }}
+    <SafeAreaView>
+      <View className="mb-6 flex-row py-3 justify-center space-x-2 bg-amber-700">
+        <Text className="text-xl font-bold text-white">
+          MyHadeeth
+        </Text>
+      </View>
+      <View className="h-screen">
+        <ImageBackground
+          source={require("../assets/kompas.png")}
+          style={[
+            styles.image,
+            { transform: [{ rotate: `${360 - compassHeading}deg` }] },
+          ]}
         >
-          <Image
-            source={require("../assets/kakbah.png")}
-            style={{ marginBottom: "45%", resizeMode: "contain", flex: 0.7 }}
-          />
-        </View>
-      </ImageBackground>
-    </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              transform: [{ rotate: `${qiblad}deg` }],
+            }}
+          >
+            <Image
+              source={require("../assets/kakbah.png")}
+              style={{ marginBottom: "45%", resizeMode: "contain", flex: 0.8 }}
+            />
+          </View>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 
   // return (
@@ -107,10 +113,10 @@ export default function Qibla({ session }) {
 
 const styles = StyleSheet.create({
   image: {
-    width: "90%",
+    width: "100%",
     flex: 0.5,
     resizeMode: "contain",
     alignSelf: "center",
   },
-  container: { backgroundColor: "#fff", flex: 1 },
+  container: { backgroundColor: "#fff", flex: 1, height: '100%' },
 });
