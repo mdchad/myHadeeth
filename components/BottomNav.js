@@ -19,18 +19,18 @@ export default function BottomNav() {
           tabBarIcon: () => <AntDesign name="home" size={24} color="black" />,
         }}
       />
-      <Tab.Screen
-        name="Qibla"
-        component={Qibla}
-        options={{
-          tabBarIcon: () => (
-            <Entypo name="direction" size={24} color="black" />
-          ),
-        }}
-      />
+      {/*<Tab.Screen*/}
+      {/*  name="Qibla"*/}
+      {/*  component={Qibla}*/}
+      {/*  options={{*/}
+      {/*    tabBarIcon: () => (*/}
+      {/*      <Entypo name="direction" size={24} color="black" />*/}
+      {/*    ),*/}
+      {/*  }}*/}
+      {/*/>*/}
       <Tab.Screen
         name="Account"
-        component={Qiblat}
+        component={Account}
         options={{
           tabBarIcon: () => (
             <AntDesign name="setting" size={24} color="black" />
