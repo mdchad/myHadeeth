@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Image, Pressable, Text, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
-import Logo from "../assets/muslim.svg";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
@@ -54,10 +53,6 @@ export default function Auth() {
           }}
         />
       </View>
-      <Image
-        source={require("../assets/muslim.svg")}
-        style={{ resizeMode: "contain", flex: 0.8 }}
-      />
       <View className="mt-16">
         <TextInput
           label="Email"
