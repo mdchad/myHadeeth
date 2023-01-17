@@ -1,22 +1,23 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Account from "./Account";
-import Home from "./Home";
-import { SparklesIcon } from "react-native-heroicons/outline";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import Prayer from "./Prayer";
 
 import Qibla from "./Qibla";
-import Qiblat from "./Qiblat";
+import {Image} from "react-native";
+import Home from "./Home";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomNav() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName='Home'>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Hadeeth"
+        component={Prayer}
         options={{
-          tabBarIcon: () => <AntDesign name="home" size={24} color="black" />,
+          tabBarIcon: () => (
+            <Image source={require("../assets/book.png")} style={{ width: 16, height: 20 }}/>
+          )
         }}
       />
       {/*<Tab.Screen*/}
@@ -29,11 +30,39 @@ export default function BottomNav() {
       {/*  }}*/}
       {/*/>*/}
       <Tab.Screen
-        name="Account"
+        name="Prayers"
+        component={Prayer}
+        options={{
+          tabBarIcon: () => (
+            <Image source={require("../assets/prayer-nav.png")} style={{ width: 16, height: 20 }}/>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: '',
+          tabBarIcon: () => (
+            <Image source={require("../assets/nav-logo.png")} style={{ marginTop: 15, width: 30, height: 30 }}/>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Qibla"
+        component={Qibla}
+        options={{
+          tabBarIcon: () => (
+            <Image source={require("../assets/compass.png")} style={{ width: 20, height: 20 }}/>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
         component={Account}
         options={{
           tabBarIcon: () => (
-            <AntDesign name="setting" size={24} color="black" />
+            <Image source={require("../assets/settings.png")} style={{ width: 16, height: 20 }}/>
           ),
         }}
       />

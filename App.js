@@ -1,10 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import Auth from "./components/Auth";
-import { Component, useEffect, useLayoutEffect, useState } from "react";
+import Login from "./components/Login";
+import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
-import Account from "./components/Account";
-import Home from "./components/Home";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import BottomNav from "./components/BottomNav";
 import {SafeAreaProvider} from "react-native-safe-area-context";
@@ -32,7 +29,7 @@ export default function App() {
         {session && session.user ? (
           <BottomNav key={session.user.id} session={session} />
         ) : (
-          <Auth />
+          <Login />
         )}
         <StatusBar style="auto" />
         {/*</View>*/}

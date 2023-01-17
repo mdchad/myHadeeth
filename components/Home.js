@@ -1,32 +1,14 @@
-import { StatusBar } from "expo-status-bar";
+import {useState, useEffect, useLayoutEffect} from "react";
+import { supabase } from "../lib/supabase";
+import {StyleSheet, View, Alert, Text, SafeAreaView, Image} from "react-native";
+import { Button, Input } from "react-native-elements";
+import {useNavigation} from "@react-navigation/native";
 import {
-  Button, Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { zonedTimeToUtc, utcToZonedTime, format } from "date-fns-tz";
-import { isAfter, differenceInMinutes, formatDistanceToNow } from 'date-fns';
-import fromUnixTime from "date-fns/fromUnixTime";
-import {
-  ChevronRightIcon,
-  ChevronLeftIcon,
-} from "react-native-heroicons/solid";
-
-let prayerNames = ["Subuh", "Syuruk", "Zohor", "Asar", "Maghrib", "Isyak"];
-let prayerIcon = [require("../assets/prayer-fajr.png"), require("../assets/prayer-fajr.png"), require("../assets/prayer-dhuhr.png"), require("../assets/prayer-asr.png"), require("../assets/prayer-maghrib.png"), require("../assets/prayer-isha.png")];
-
-const options = { year: "numeric", month: "long", day: "numeric" }
-const formatHijri = new Intl.DateTimeFormat("ms-MY-u-ca-islamic-nu-latn", options)
+  BookmarkIcon,
+} from "react-native-heroicons/outline";
 
 export default function Home() {
   const navigation = useNavigation();
-  const [prayerTimes, setPrayerTimes] = useState([]);
-  const [nextPrayer, setNextPrayer] = useState(null)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -34,106 +16,56 @@ export default function Home() {
     });
   }, []);
 
-  useEffect(() => {
-    fetchPrayer();
-  }, []);
-
-  async function fetchPrayer() {
-    try {
-      const response = await fetch(
-        "http://mpt.i906.my/mpt.json?code=kdh-4&filter=1"
-      );
-      const {
-        response: { times },
-      } = await response.json();
-
-      let prayers = [...prayerTimes];
-      times.forEach((time, i) => {
-        const result = fromUnixTime(time);
-
-        const zonedDate = utcToZonedTime(result, "Asia/Kuala_Lumpur");
-
-        const formattedPrayer = format(new Date(zonedDate), "hh:mm a");
-
-        const now = new Date();
-
-        const prayerMeta = {
-          name: prayerNames[i],
-          timezoneDate: zonedDate,
-          prayerTime: formattedPrayer,
-          hasElapsed: isAfter(now, zonedDate),
-          icon: prayerIcon[i]
-        }
-
-        prayers.push(prayerMeta);
-      });
-      if (!prayerTimes.length) {
-        const nextAvailablePrayer = prayers.find(prayer => prayer.hasElapsed === false)
-
-        setPrayerTimes(prayers);
-        setNextPrayer(nextAvailablePrayer)
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <SafeAreaView>
-      <View className="h-full w-full pt-16 px-14 bg-[#EDEEC0]">
-        <View className="w-64 flex flex-row items-center justify-between mb-5">
-          <ChevronLeftIcon height={20} width={20} color={"#000"} />
-          <View className="flex items-center">
-            <Text className="mb-1 text-md">{format(new Date(), "cccc, d LLL")}</Text>
-            <Text>{formatHijri.format(new Date())}</Text>
+      <View className="h-full w-full">
+        <View className="pt-11 px-10 justify-between flex-row pb-6 space-x-2 bg-[#EDEEC0] rounded-b-2xl">
+          <View>
+            <Text className="mb-1">
+              Assalamualaikum,
+            </Text>
+            <Text className="font-bold uppercase">Ahmad ali</Text>
           </View>
-          <ChevronRightIcon height={20} width={20} color={"#000"} />
+          <View className="flex flex-row items-center">
+            <Image source={require("../assets/search.png")} style={{ width: 16, height: 20, marginRight: 20 }}/>
+            <Image source={require("../assets/man.png")} style={{ width: 16, height: 20 }}/>
+          </View>
         </View>
-        {/*<Text className="text-2xl font-bold mb-4">Prayer Times</Text>*/}
-        <View className="mx-6 flex flex-row justify-between">
-          <Image
-            source={require("../assets/muslim-prayer.png")}
-            style={{
-              resizeMode: "contain",
-              height: 78,
-              width: 77,
-              display: "flex",
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "center",
-            }}
-          />
-          {!!nextPrayer && (
-              <View className="flex items-end">
-                <Text className="mb-3">{nextPrayer.name} Prayer</Text>
-                <View className="flex flex-row mb-3">
-                  <Image source={nextPrayer.icon} style={{ width: 22, height: 22 }}/>
-                  <Text className="text-sm ml-1">{nextPrayer.prayerTime}</Text>
-                </View>
-                <Text className="text-[10px]">Countdown {formatDistanceToNow(nextPrayer.timezoneDate, { addSuffix: true })}</Text>
+        <View className="flex items-center justify-center w-full">
+          <Text className="my-4 text-center font-bold text-[36px] w-44">Hadeeth of the Day</Text>
+          <View className="py-5 px-8 mx-10 bg-[#D9D9D9] rounded-md">
+            <Text>Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus..</Text>
+          </View>
+          <View className="flex flex-row self-end items-center mx-10 mt-2">
+            <Text className="text-xs mr-2">Bookmark this Hadeeth</Text>
+            <BookmarkIcon height={20} width={20} color={"#000"} />
+          </View>
+          <View className="flex self-start mx-10 mt-4">
+            <Text className="ml-2 text-lg">EXPLORE RELATED HADEETH</Text>
+            <View className="flex flex-row justify-between w-full">
+              <View className="flex items-center">
+                <View className="mt-4 w-16 h-16 bg-[#D9D9D9] rounded-md"></View>
+                <Text className="mt-1 uppercase text-xs">Sadqah</Text>
               </View>
-            )
-          }
-        </View>
-        <View className="my-6 flex flex-row items-center justify-center">
-          <Text className="text-center">Kuala Lumpur, Malaysia</Text>
-          <Image source={require("../assets/pin.png")} style={{ width: 12, height: 12 }} />
-        </View>
-        <View>
-          {!!prayerTimes.length ? prayerTimes.map((prayer, i) => (
-            <View className={`flex flex-row justify-between pt-4 pb-4 border-0 border-b border-[#7C9082] ${i + 1 === prayerTimes.length && "border-b-0"} ${i === 0 && "pt-0"}`}>
-              <Text key={i} className="text-sm">
-                {prayer.name}
-              </Text>
-              <Image source={prayer.icon} style={{ width: 22, height: 22 }}/>
-              <Text>
-                {prayer.prayerTime}
-              </Text>
+              <View className="flex items-center">
+                <View className="mt-4 w-16 h-16 bg-[#D9D9D9] rounded-md"></View>
+                <Text className="mt-1 uppercase text-xs">Prayer</Text>
+              </View>
+              <View className="flex items-center">
+                <View className="mt-4 w-16 h-16 bg-[#D9D9D9] rounded-md"></View>
+                <Text className="mt-1 uppercase text-xs">Family</Text>
+              </View>
+              <View className="flex items-center">
+                <View className="mt-4 w-16 h-16 bg-[#D9D9D9] rounded-md"></View>
+                <Text className="mt-1 uppercase text-xs">Lifestyle</Text>
+              </View>
             </View>
-          )) : null}
+          </View>
         </View>
-        <StatusBar style="auto" />
       </View>
+      {/*<View className="h-full w-full pt-16 px-14 bg-[#EDEEC0]">*/}
+      {/*  <Text>hello</Text>*/}
+      {/*</View>*/}
     </SafeAreaView>
   );
 }
