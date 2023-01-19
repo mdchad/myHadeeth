@@ -23,16 +23,10 @@ let prayerIcon = [require("../assets/prayer-fajr.png"), require("../assets/praye
 const options = { year: "numeric", month: "long", day: "numeric" }
 const formatHijri = new Intl.DateTimeFormat("ms-MY-u-ca-islamic-nu-latn", options)
 
-export default function Prayer() {
+export default function Prayer({ route }) {
   const navigation = useNavigation();
   const [prayerTimes, setPrayerTimes] = useState([]);
   const [nextPrayer, setNextPrayer] = useState(null)
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
 
   useEffect(() => {
     fetchPrayer();

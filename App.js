@@ -1,12 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import Login from "./components/Login";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import BottomNav from "./components/BottomNav";
-import {SafeAreaProvider} from "react-native-safe-area-context";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ResetPassword from "./components/ResetPassword";
+import Signup from "./components/Signup";
+import { RootSiblingParent } from "react-native-root-siblings";
+import GlobalProvider from "./components/GlobalContext";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -19,31 +22,51 @@ export default function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+
   }, []);
 
   const Stack = createNativeStackNavigator();
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        {/*<View className="flex-1 justify-center px-4 bg-white">*/}
-        {/*<Text className="text-red-800">Hello!</Text>*/}
-        {/*{session && session.user ? <Home key={session.user.id} session={session} /> : <Auth />}*/}
-        {/*{session && session.user ? null : <Auth />}*/}
-        <Stack.Navigator initialRouteName="Login">
-          {session && session.user ? (
-            <Stack.Screen name="Bottom" component={BottomNav} />
-          ) : (
-            <>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Reset" component={ResetPassword} />
-            </>
-          )}
-        </Stack.Navigator>
-
-        <StatusBar style="auto" />
-        {/*</View>*/}
-      </NavigationContainer>
+      <GlobalProvider>
+        <RootSiblingParent>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Login">
+              {session && session.user ? (
+                <>
+                  <Stack.Screen
+                    name="Bottom"
+                    component={BottomNav}
+                    options={{ headerShown: false }}
+                    initialParams={{ userId: session.user.id }}
+                  />
+                </>
+              ) : (
+                <>
+                  <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Reset"
+                    component={ResetPassword}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Signup"
+                    component={Signup}
+                    options={{ headerShown: false }}
+                  />
+                </>
+              )}
+            </Stack.Navigator>
+            <StatusBar style="auto" />
+            {/*</View>*/}
+          </NavigationContainer>
+        </RootSiblingParent>
+      </GlobalProvider>
     </SafeAreaProvider>
   );
 }

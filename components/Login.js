@@ -1,27 +1,25 @@
-import React, {useLayoutEffect, useState} from "react";
+import React, {useContext, useLayoutEffect, useState} from "react";
 import { Alert, Image, Pressable, Text, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
 import {useNavigation} from "@react-navigation/native";
+import {GlobalContext} from "./GlobalContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const {
+    authDispatch
+  } = useContext(GlobalContext);
   const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
-
 
   async function signInWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error, data } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
+    authDispatch(data.user.user_metadata)
 
     if (error) {
       Alert.alert(error.message);
@@ -29,21 +27,6 @@ export default function Login() {
     setLoading(false);
   }
 
-  async function signUpWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      Alert.alert(error.message);
-    }
-    setLoading(false);
-  }
-
-  // rotate-45 relative
-  // transform: [{ rotate: "-45deg" }],
   return (
     <View className="flex items-center justify-center px-4 mt-16 sm:mx-auto sm:w-full sm:max-w-md py-8 px-4 sm:rounded-lg sm:px-10 w-full">
       {/*<Text className="text-5xl text-center font-bold mb-6">MyHadeeth</Text>*/}
@@ -117,7 +100,7 @@ export default function Login() {
         <Text>No account yet?</Text>
       </View>
       <View className="mt-3">
-        <Pressable onPress={() => navigation.navigate('Reset')}>
+        <Pressable onPress={() => navigation.navigate('Signup')}>
           <Text className="underline font-bold">Sign Up</Text>
         </Pressable>
       </View>

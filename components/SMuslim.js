@@ -1,18 +1,15 @@
+import {Image, SafeAreaView, Text, View} from "react-native";
 import React, {useContext} from "react";
-import {Alert, Image, Pressable, SafeAreaView, Text, TextInput, View} from "react-native";
-import {useNavigation} from "@react-navigation/native";
 import {GlobalContext} from "./GlobalContext";
 
-export default function Hadeeth() {
+export default function SMuslim() {
   const {
     authState,
   } = useContext(GlobalContext);
 
-  const navigation = useNavigation();
-
   return (
     <SafeAreaView>
-      <View className="h-full w-full">
+      <View className="h-full w-full bg-white">
         <View className="pt-11 px-10 justify-between flex-row pb-6 space-x-2 bg-[#EDEEC0] rounded-b-2xl">
           <View>
             <Text className="mb-1">
@@ -25,15 +22,15 @@ export default function Hadeeth() {
             <Image source={require("../assets/man.png")} style={{ width: 16, height: 20 }}/>
           </View>
         </View>
-
-        <View className="my-auto flex items-center justify-center px-4 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:px-10 w-full">
-          <Pressable onPress={() => navigation.navigate('SMuslim')}>
-            <View className="flex items-center mb-2">
-              <Image source={require("../assets/book.png")} style={{ width: 16, height: 20}} />
-              <Text>Sahih Muslim</Text>
-            </View>
-          </Pressable>
-          <Image source={require("../assets/hadeeth-logo.png")} style={{ width: 170, height: 150}} />
+        <View className="mx-10">
+          <View className="mt-8 flex justify-center items-center">
+            <Text className="text-[24px] font-bold">Sahih Muslim</Text>
+          </View>
+          <Text className="mt-4 font-bold text-[20px] mb-5">Kitab Faraid</Text>
+          <Image source={require("../assets/SMuslim1.png")} style={{ width: 290, height: 208 }}/>
+          <View className="flex items-end">
+            <Image source={require("../assets/volume.png")} style={{ width: 16, height: 16}} />
+          </View>
         </View>
       </View>
     </SafeAreaView>

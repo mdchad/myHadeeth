@@ -1,18 +1,16 @@
-import {useLayoutEffect} from "react";
+import React, {useContext, useLayoutEffect} from "react";
 import {View, Text, SafeAreaView, Image} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {
   BookmarkIcon,
 } from "react-native-heroicons/outline";
+import { supabase } from "../lib/supabase";
+import {GlobalContext} from "./GlobalContext";
 
 export default function Home() {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
+  const {
+    authState,
+  } = useContext(GlobalContext);
 
   return (
     <SafeAreaView>
@@ -22,7 +20,7 @@ export default function Home() {
             <Text className="mb-1">
               Assalamualaikum,
             </Text>
-            <Text className="font-bold uppercase">Ahmad ali</Text>
+            <Text className="font-bold uppercase">{authState?.full_name}</Text>
           </View>
           <View className="flex flex-row items-center">
             <Image source={require("../assets/search.png")} style={{ width: 16, height: 20, marginRight: 20 }}/>
