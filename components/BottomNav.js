@@ -5,15 +5,26 @@ import Prayer from "./Prayer";
 import Qibla from "./Qibla";
 import {Image} from "react-native";
 import Home from "./Home";
+import {useNavigation} from "@react-navigation/native";
+import {useLayoutEffect} from "react";
+import Hadeeth from "./Hadeeth";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomNav() {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
+
   return (
     <Tab.Navigator initialRouteName='Home'>
       <Tab.Screen
         name="Hadeeth"
-        component={Prayer}
+        component={Hadeeth}
         options={{
           tabBarIcon: () => (
             <Image source={require("../assets/book.png")} style={{ width: 16, height: 20 }}/>

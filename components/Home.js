@@ -1,7 +1,5 @@
-import {useState, useEffect, useLayoutEffect} from "react";
-import { supabase } from "../lib/supabase";
-import {StyleSheet, View, Alert, Text, SafeAreaView, Image} from "react-native";
-import { Button, Input } from "react-native-elements";
+import {useLayoutEffect} from "react";
+import {View, Text, SafeAreaView, Image} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {
   BookmarkIcon,

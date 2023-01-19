@@ -121,8 +121,8 @@ export default function Prayer() {
         </View>
         <View>
           {!!prayerTimes.length ? prayerTimes.map((prayer, i) => (
-            <View className={`flex flex-row justify-between pt-4 pb-4 border-0 border-b border-[#7C9082] ${i + 1 === prayerTimes.length && "border-b-0"} ${i === 0 && "pt-0"}`}>
-              <Text key={i} className="text-sm">
+            <View key={i} className={`flex flex-row justify-between pt-4 pb-4 border-0 border-b border-[#7C9082] ${i + 1 === prayerTimes.length && "border-b-0"} ${i === 0 && "pt-0"}`}>
+              <Text className="text-sm">
                 {prayer.name}
               </Text>
               <Image source={prayer.icon} style={{ width: 22, height: 22 }}/>

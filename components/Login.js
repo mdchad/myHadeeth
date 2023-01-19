@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, {useLayoutEffect, useState} from "react";
 import { Alert, Image, Pressable, Text, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
+import {useNavigation} from "@react-navigation/native";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
+
 
   async function signInWithEmail() {
     setLoading(true);
@@ -36,7 +45,7 @@ export default function Login() {
   // rotate-45 relative
   // transform: [{ rotate: "-45deg" }],
   return (
-    <View className="flex items-center justify-center px-4 mt-8 sm:mx-auto sm:w-full sm:max-w-md py-8 px-4 sm:rounded-lg sm:px-10 w-full">
+    <View className="flex items-center justify-center px-4 mt-16 sm:mx-auto sm:w-full sm:max-w-md py-8 px-4 sm:rounded-lg sm:px-10 w-full">
       {/*<Text className="text-5xl text-center font-bold mb-6">MyHadeeth</Text>*/}
       <View className="bg-[#F5EFD2] w-[115] h-[115] flex items-center justify-center rotate-[-43deg]">
         <Image
@@ -76,6 +85,11 @@ export default function Login() {
           placeholder="Password"
           autoCapitalize={"none"}
         />
+        <View className="flex items-end mt-2">
+          <Pressable onPress={() => navigation.navigate('Reset')}>
+            <Text className="underline text-xs">Forgot Password ?</Text>
+          </Pressable>
+        </View>
       </View>
       <View className="mt-6 mb-4">
         <Pressable
@@ -97,6 +111,14 @@ export default function Login() {
         >
           <Text className="text-sm text-center mr-2">Google</Text>
           <Image source={require("../assets/google.png")} style={{ width: 17, height: 19 }} />
+        </Pressable>
+      </View>
+      <View className="mt-5">
+        <Text>No account yet?</Text>
+      </View>
+      <View className="mt-3">
+        <Pressable onPress={() => navigation.navigate('Reset')}>
+          <Text className="underline font-bold">Sign Up</Text>
         </Pressable>
       </View>
       {/*<View>*/}
