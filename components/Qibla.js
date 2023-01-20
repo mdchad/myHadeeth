@@ -11,7 +11,7 @@ import {
 // import CompassHeading from "react-native-compass-heading";
 // import Geolocation from "react-native-geolocation-service";
 
-export default function Qibla({ session }) {
+export default function Qibla() {
   // const navigation = useNavigation();
   // const [compassHeading, setCompassHeding] = useState(0);
   // const [qiblad, setQiblad] = useState(0);

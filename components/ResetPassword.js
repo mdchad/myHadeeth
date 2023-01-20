@@ -1,9 +1,6 @@
 import React, {useLayoutEffect, useState} from "react";
 import {View, Text, SafeAreaView, Image, Pressable, TextInput} from "react-native";
 import {useNavigation} from "@react-navigation/native";
-import {
-  BookmarkIcon,
-} from "react-native-heroicons/outline";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");

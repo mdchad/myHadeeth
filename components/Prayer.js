@@ -1,16 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import {
-  Button, Image,
-  Pressable,
+  Image,
   SafeAreaView,
-  StyleSheet,
   Text,
   View,
 } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { zonedTimeToUtc, utcToZonedTime, format } from "date-fns-tz";
-import { isAfter, differenceInMinutes, formatDistanceToNow } from 'date-fns';
+import { utcToZonedTime, format } from "date-fns-tz";
+import { isAfter, formatDistanceToNow } from 'date-fns';
 import fromUnixTime from "date-fns/fromUnixTime";
 import {
   ChevronRightIcon,

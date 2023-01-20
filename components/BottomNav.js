@@ -7,9 +7,6 @@ import { Image } from "react-native";
 import Home from "./Home";
 import Hadeeth from "./Hadeeth";
 import HadeethHome from "./HadeethHome";
-import {useContext, useEffect, useState} from "react";
-import { supabase } from "../lib/supabase";
-import {GlobalContext} from "./GlobalContext";
 
 const Tab = createBottomTabNavigator();
 

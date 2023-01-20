@@ -63,7 +63,6 @@ export default function App() {
               )}
             </Stack.Navigator>
             <StatusBar style="auto" />
-            {/*</View>*/}
           </NavigationContainer>
         </RootSiblingParent>
       </GlobalProvider>

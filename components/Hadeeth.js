@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Alert, Image, Pressable, SafeAreaView, Text, TextInput, View} from "react-native";
+import {Image, Pressable, SafeAreaView, Text, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {GlobalContext} from "./GlobalContext";
 
