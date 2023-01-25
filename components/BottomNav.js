@@ -86,7 +86,7 @@ export default function BottomNav({ route }) {
           tabBarIcon: () => (
             <Image
               source={require("../assets/settings.png")}
-              style={{ width: 16, height: 20 }}
+              style={{ width: 20, height: 20 }}
             />
           ),
         }}
