@@ -18,7 +18,6 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [newUser, setNewUser] = useState(null);
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -46,7 +45,6 @@ export default function Signup() {
       Alert.alert(error.message);
     } else {
       if (createdUser) {
-        setNewUser(createdUser);
         Toast.show('Successfully sign up', {
           duration: Toast.durations.LONG,
         });

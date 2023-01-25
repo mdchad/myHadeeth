@@ -1,30 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  Image,
-  SafeAreaView,
-  Text,
-  View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { utcToZonedTime, format } from "date-fns-tz";
-import { isAfter, formatDistanceToNow } from 'date-fns';
+import { isAfter, formatDistanceToNow } from "date-fns";
 import fromUnixTime from "date-fns/fromUnixTime";
+import { utcToZonedTime, format } from "date-fns-tz";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
+import { Image, SafeAreaView, Text, View } from "react-native";
 import {
   ChevronRightIcon,
   ChevronLeftIcon,
 } from "react-native-heroicons/solid";
 
-let prayerNames = ["Subuh", "Syuruk", "Zohor", "Asar", "Maghrib", "Isyak"];
-let prayerIcon = [require("../assets/prayer-fajr.png"), require("../assets/prayer-fajr.png"), require("../assets/prayer-dhuhr.png"), require("../assets/prayer-asr.png"), require("../assets/prayer-maghrib.png"), require("../assets/prayer-isha.png")];
+const prayerNames = ["Subuh", "Syuruk", "Zohor", "Asar", "Maghrib", "Isyak"];
+const prayerIcon = [
+  require("../assets/prayer-fajr.png"),
+  require("../assets/prayer-fajr.png"),
+  require("../assets/prayer-dhuhr.png"),
+  require("../assets/prayer-asr.png"),
+  require("../assets/prayer-maghrib.png"),
+  require("../assets/prayer-isha.png"),
+];
 
-const options = { year: "numeric", month: "long", day: "numeric" }
-const formatHijri = new Intl.DateTimeFormat("ms-MY-u-ca-islamic-nu-latn", options)
+const options = { year: "numeric", month: "long", day: "numeric" };
+const formatHijri = new Intl.DateTimeFormat(
+  "ms-MY-u-ca-islamic-nu-latn",
+  options
+);
 
-export default function Prayer({ route }) {
-  const navigation = useNavigation();
+export default function Prayer() {
   const [prayerTimes, setPrayerTimes] = useState([]);
-  const [nextPrayer, setNextPrayer] = useState(null)
+  const [nextPrayer, setNextPrayer] = useState(null);
 
   useEffect(() => {
     fetchPrayer();
@@ -39,7 +42,7 @@ export default function Prayer({ route }) {
         response: { times },
       } = await response.json();
 
-      let prayers = [...prayerTimes];
+      const prayers = [...prayerTimes];
       times.forEach((time, i) => {
         const result = fromUnixTime(time);
 
@@ -54,16 +57,18 @@ export default function Prayer({ route }) {
           timezoneDate: zonedDate,
           prayerTime: formattedPrayer,
           hasElapsed: isAfter(now, zonedDate),
-          icon: prayerIcon[i]
-        }
+          icon: prayerIcon[i],
+        };
 
         prayers.push(prayerMeta);
       });
       if (!prayerTimes.length) {
-        const nextAvailablePrayer = prayers.find(prayer => prayer.hasElapsed === false)
+        const nextAvailablePrayer = prayers.find(
+          (prayer) => prayer.hasElapsed === false
+        );
 
         setPrayerTimes(prayers);
-        setNextPrayer(nextAvailablePrayer)
+        setNextPrayer(nextAvailablePrayer);
       }
     } catch (error) {
       console.error(error);
@@ -76,7 +81,9 @@ export default function Prayer({ route }) {
         <View className="w-64 flex flex-row items-center justify-between mb-5">
           <ChevronLeftIcon height={20} width={20} color={"#000"} />
           <View className="flex items-center">
-            <Text className="mb-1 text-md">{format(new Date(), "cccc, d LLL")}</Text>
+            <Text className="mb-1 text-md">
+              {format(new Date(), "cccc, d LLL")}
+            </Text>
             <Text>{formatHijri.format(new Date())}</Text>
           </View>
           <ChevronRightIcon height={20} width={20} color={"#000"} />
@@ -96,33 +103,49 @@ export default function Prayer({ route }) {
             }}
           />
           {!!nextPrayer && (
-              <View className="flex items-end">
-                <Text className="mb-3">{nextPrayer.name} Prayer</Text>
-                <View className="flex flex-row mb-3">
-                  <Image source={nextPrayer.icon} style={{ width: 22, height: 22 }}/>
-                  <Text className="text-sm ml-1">{nextPrayer.prayerTime}</Text>
-                </View>
-                <Text className="text-[10px]">Countdown {formatDistanceToNow(nextPrayer.timezoneDate, { addSuffix: true })}</Text>
+            <View className="flex items-end">
+              <Text className="mb-3">{nextPrayer.name} Prayer</Text>
+              <View className="flex flex-row mb-3">
+                <Image
+                  source={nextPrayer.icon}
+                  style={{ width: 22, height: 22 }}
+                />
+                <Text className="text-sm ml-1">{nextPrayer.prayerTime}</Text>
               </View>
-            )
-          }
+              <Text className="text-[10px]">
+                Countdown{" "}
+                {formatDistanceToNow(nextPrayer.timezoneDate, {
+                  addSuffix: true,
+                })}
+              </Text>
+            </View>
+          )}
         </View>
         <View className="my-6 flex flex-row items-center justify-center">
           <Text className="text-center mr-2">Kuala Lumpur, Malaysia</Text>
-          <Image source={require("../assets/pin.png")} style={{ width: 14, height: 16 }} />
+          <Image
+            source={require("../assets/pin.png")}
+            style={{ width: 14, height: 16 }}
+          />
         </View>
         <View>
-          {!!prayerTimes.length ? prayerTimes.map((prayer, i) => (
-            <View key={i} className={`flex flex-row justify-between pt-4 pb-4 border-0 border-b border-[#7C9082] ${i + 1 === prayerTimes.length && "border-b-0"} ${i === 0 && "pt-0"}`}>
-              <Text className="text-sm">
-                {prayer.name}
-              </Text>
-              <Image source={prayer.icon} style={{ width: 22, height: 22 }}/>
-              <Text>
-                {prayer.prayerTime}
-              </Text>
-            </View>
-          )) : null}
+          {prayerTimes.length
+            ? prayerTimes.map((prayer, i) => (
+                <View
+                  key={i}
+                  className={`flex flex-row justify-between pt-4 pb-4 border-0 border-b border-[#7C9082] ${
+                    i + 1 === prayerTimes.length && "border-b-0"
+                  } ${i === 0 && "pt-0"}`}
+                >
+                  <Text className="text-sm">{prayer.name}</Text>
+                  <Image
+                    source={prayer.icon}
+                    style={{ width: 22, height: 22 }}
+                  />
+                  <Text>{prayer.prayerTime}</Text>
+                </View>
+              ))
+            : null}
         </View>
         <StatusBar style="auto" />
       </View>

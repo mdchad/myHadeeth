@@ -1,15 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import Login from "./components/Login";
-import React, { useEffect, useState } from "react";
-import { supabase } from "./lib/supabase";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import BottomNav from "./components/BottomNav";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
+import { RootSiblingParent } from "react-native-root-siblings";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import BottomNav from "./components/BottomNav";
+import GlobalProvider from "./components/GlobalContext";
+import Login from "./components/Login";
 import ResetPassword from "./components/ResetPassword";
 import Signup from "./components/Signup";
-import { RootSiblingParent } from "react-native-root-siblings";
-import GlobalProvider from "./components/GlobalContext";
+import { supabase } from "./lib/supabase";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -22,7 +23,6 @@ export default function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-
   }, []);
 
   const Stack = createNativeStackNavigator();
@@ -39,7 +39,7 @@ export default function App() {
                     name="Bottom"
                     component={BottomNav}
                     options={{ headerShown: false }}
-                    initialParams={{ userId: session.user.id }}
+                    initialParams={{ name: session.user?.user_metadata?.full_name, session: session }}
                   />
                 </>
               ) : (

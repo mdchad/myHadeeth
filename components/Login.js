@@ -1,25 +1,24 @@
-import React, {useContext, useLayoutEffect, useState} from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useContext, useState } from "react";
 import { Alert, Image, Pressable, Text, TextInput, View } from "react-native";
+
+import { GlobalContext } from "./GlobalContext";
 import { supabase } from "../lib/supabase";
-import {useNavigation} from "@react-navigation/native";
-import {GlobalContext} from "./GlobalContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const {
-    authDispatch
-  } = useContext(GlobalContext);
+  const { authDispatch } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   async function signInWithEmail() {
     setLoading(true);
     const { error, data } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+      email,
+      password,
     });
-    authDispatch(data.user.user_metadata)
+    authDispatch(data.user.user_metadata);
 
     if (error) {
       Alert.alert(error.message);
@@ -69,7 +68,7 @@ export default function Login() {
           autoCapitalize={"none"}
         />
         <View className="flex items-end mt-2">
-          <Pressable onPress={() => navigation.navigate('Reset')}>
+          <Pressable onPress={() => navigation.navigate("Reset")}>
             <Text className="underline text-xs">Forgot Password ?</Text>
           </Pressable>
         </View>
@@ -81,8 +80,13 @@ export default function Login() {
           onPress={() => signInWithEmail()}
         >
           <Text></Text>
-          <Text className="text-sm font-bold text-center text-white uppercase basis-11/12">Login</Text>
-          <Image source={require("../assets/enter.png")} style={{ width: 22, height: 22 }}/>
+          <Text className="text-sm font-bold text-center text-white uppercase basis-11/12">
+            Login
+          </Text>
+          <Image
+            source={require("../assets/enter.png")}
+            style={{ width: 22, height: 22 }}
+          />
         </Pressable>
       </View>
       <Text className="text-sm text-center mb-4">or continue with</Text>
@@ -93,14 +97,17 @@ export default function Login() {
           onPress={() => signInWithEmail()}
         >
           <Text className="text-sm text-center mr-2">Google</Text>
-          <Image source={require("../assets/google.png")} style={{ width: 17, height: 19 }} />
+          <Image
+            source={require("../assets/google.png")}
+            style={{ width: 17, height: 19 }}
+          />
         </Pressable>
       </View>
       <View className="mt-5">
         <Text>No account yet?</Text>
       </View>
       <View className="mt-3">
-        <Pressable onPress={() => navigation.navigate('Signup')}>
+        <Pressable onPress={() => navigation.navigate("Signup")}>
           <Text className="underline font-bold">Sign Up</Text>
         </Pressable>
       </View>

@@ -1,23 +1,33 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Account from "./Account";
-import Prayer from "./Prayer";
-
-import Qibla from "./Qibla";
 import { Image } from "react-native";
-import Home from "./Home";
+
 import Hadeeth from "./Hadeeth";
 import HadeethHome from "./HadeethHome";
+import Home from "./Home";
+import Prayer from "./Prayer";
+import Qibla from "./Qibla";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "./GlobalContext";
+import Settings from "./Settings";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomNav() {
+export default function BottomNav({ route }) {
+  const { authDispatch, authState } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (!authState) {
+      authDispatch({ full_name: route.params.name })
+    }
+  }, [])
+
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
         name="Hadeeth"
         component={HadeethHome}
         options={{
-          title: 'Hadeeth',
+          title: "Hadeeth",
           headerShown: false,
           tabBarIcon: () => (
             <Image
@@ -69,7 +79,8 @@ export default function BottomNav() {
       />
       <Tab.Screen
         name="Settings"
-        component={Account}
+        component={Settings}
+        initialParams={{ session: route.params.session }}
         options={{
           headerShown: false,
           tabBarIcon: () => (

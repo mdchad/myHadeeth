@@ -1,12 +1,6 @@
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { StyleSheet, View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  ImageBackground,
-} from "react-native";
 // import { useNavigation } from "@react-navigation/native";
 // import CompassHeading from "react-native-compass-heading";
 // import Geolocation from "react-native-geolocation-service";
@@ -102,9 +96,7 @@ export default function Qibla() {
   return (
     <SafeAreaView>
       <View className="mb-6 flex-row py-3 justify-center space-x-2 bg-amber-700">
-        <Text className="text-xl font-bold text-white">
-          MyHadeeth
-        </Text>
+        <Text className="text-xl font-bold text-white">MyHadeeth</Text>
       </View>
     </SafeAreaView>
   );
@@ -117,5 +109,5 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: "center",
   },
-  container: { backgroundColor: "#fff", flex: 1, height: '100%' },
+  container: { backgroundColor: "#fff", flex: 1, height: "100%" },
 });
