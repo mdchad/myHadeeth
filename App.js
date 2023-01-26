@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import ResetPassword from "./components/ResetPassword";
 import Signup from "./components/Signup";
 import { supabase } from "./lib/supabase";
+import Welcome from "./components/Welcome";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -32,7 +33,7 @@ export default function App() {
       <GlobalProvider>
         <RootSiblingParent>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator initialRouteName="Welcome">
               {session && session.user ? (
                 <>
                   <Stack.Screen
@@ -44,6 +45,11 @@ export default function App() {
                 </>
               ) : (
                 <>
+                  <Stack.Screen
+                    name="Welcome"
+                    component={Welcome}
+                    options={{ headerShown: false }}
+                  />
                   <Stack.Screen
                     name="Login"
                     component={Login}
