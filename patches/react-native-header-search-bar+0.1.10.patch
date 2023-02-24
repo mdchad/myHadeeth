@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-header-search-bar/lib/src/HeaderSearchBar/HeaderSearchBar.js b/node_modules/react-native-header-search-bar/lib/src/HeaderSearchBar/HeaderSearchBar.js
+index 24a45a6..594114d 100644
+--- a/node_modules/react-native-header-search-bar/lib/src/HeaderSearchBar/HeaderSearchBar.js
++++ b/node_modules/react-native-header-search-bar/lib/src/HeaderSearchBar/HeaderSearchBar.js
+@@ -28,7 +28,7 @@ const HeaderSearchBar = props => {
+     <Androw style={shadowStyle(shadowColor)}>
+       <View style={container(backgroundColor)}>
+         <View style={styles.containerGlue}>
+-          <TouchableOpacity onPress={onPressHamburgerIcon}>
++          {/* <TouchableOpacity onPress={onPressHamburgerIcon}>
+             {iconComponent || (
+               <Icon
+                 size={25}
+@@ -38,7 +38,7 @@ const HeaderSearchBar = props => {
+                 {...props}
+               />
+             )}
+-          </TouchableOpacity>
++          </TouchableOpacity> */}
+           <View style={styles.titleContainer}>
+             <Text style={firstTitleStyle(firstTitleColor, firstTitleFontSize)}>
+               {firstTitle}
