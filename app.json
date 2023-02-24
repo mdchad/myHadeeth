@@ -1,10 +1,44 @@
 {
-  "expo": {
-    "scheme": "acme",
-    "web": {
-      "bundler": "metro"
-    },
-    "name": "my-hadeeth",
-    "slug": "my-hadeeth"
-  }
+    "expo": {
+        "scheme": "my-hadeeth",
+        "name": "my-hadeeth",
+        "slug": "my-hadeeth",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.anonymous.my-hadeeth",
+            "infoPlist" : {
+                "UIBackgroundModes": ["remote-notification", "audio", "fetch"]
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#FFFFFF"
+            },
+            "package": "com.anonymous.my-hadeeth"
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "3b6b6366-bbe9-423b-b449-11a9da422b1c"
+            }
+        }
+    }
 }
