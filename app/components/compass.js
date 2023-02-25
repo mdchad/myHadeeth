@@ -44,14 +44,14 @@ export default App = () => {
             })
         );
 
-        console.log('subscribed');
+        // console.log('subscribed');
     };
 
     const _unsubscribe = () => {
         subscription && subscription.remove();
         setSubscription(null);
 
-        console.log('unsubscribed');
+        // console.log('unsubscribed');
     };
 
     const FILTER_SIZE = 5;
