@@ -12,7 +12,6 @@ import {
 const Search = () => {
     const router = useRouter();
     const [value, setValue] = useState('');
-    // const [searching, setSearching] = useState(false);
 
     const countries = [
         { name: "Belgium", continent: "Europe" },
@@ -41,6 +40,34 @@ const Search = () => {
         { name: "Pakistan", continent: "Asia" },
     ];
 
+    const highlightText = (text, query) => {
+        if (!query.trim()) {
+            return text;
+        }
+
+        const regex = new RegExp(`(${query})`, 'gi');
+        const parts = text.split(regex);
+
+        return (
+            <Text>
+                {parts.map((part, i) =>
+                    regex.test(part) ? (
+                        <Text key={i} style={{ backgroundColor: 'yellow' }}>
+                            {part}
+                        </Text>
+                    ) : (
+                        part
+                    )
+                )}
+            </Text>
+        );
+    };
+
+    const renderItem = ({ item }) => {
+        const highlightedText = highlight(item.name, value);
+        return <Text>{highlightedText}</Text>;
+    };
+
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View className="relative">
@@ -49,26 +76,26 @@ const Search = () => {
                     searchBoxText="Search..."
                     backgroundColor={"#EDEEC0"}
                     className="block"
-                    // disableTextInput={searching ? true : false}
                     firstTitle="Assalamualaikum"
-                    // firstTitleFontSize={16}
-                    firstTitleColor={"#000"}
                     secondTitle="Replace with name"
-                    // secondTitleFontSize={18}
-                    secondTitleColor={"#000"}
-
                 />
                 {value.length > 0 && (
-                    // <SafeAreaView>
+                    // <FlatList
+                    //     className="bg-white w-full h-full"
+                    //     // data={countries.filter((country) => country.name.toLowerCase().includes(value.toLowerCase()))}
+                    //     data={countries}
+                    //     renderItem={renderItem}
+                    //     keyExtractor={item => item.name}
+                    // />
+
                     <FlatList
                         className="bg-white w-full h-full"
-                        data={countries.filter((country) => country.name.toLowerCase().includes(value.toLowerCase()))}
-                        renderItem={({ item }) => (
-                            <Text>{item.name}</Text>
+                        data={countries.filter((country) =>
+                            country.name.toLowerCase().includes(value.toLowerCase())
                         )}
-                        keyExtractor={item => item.name}
+                        renderItem={({ item }) => <Text>{highlightText(item.name, value)}</Text>}
+                        keyExtractor={(item) => item.name}
                     />
-                    // </SafeAreaView>
                 )}
             </View >
         </TouchableWithoutFeedback>
