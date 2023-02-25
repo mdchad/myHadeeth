@@ -21,9 +21,14 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.anonymous.my-hadeeth",
-            "infoPlist" : {
-                "UIBackgroundModes": ["remote-notification", "audio", "fetch"]
-            }
+            "infoPlist": {
+                "UIBackgroundModes": [
+                    "remote-notification",
+                    "audio",
+                    "fetch",
+                    "location"
+                ],
+              },
         },
         "android": {
             "adaptiveIcon": {
