@@ -8,60 +8,51 @@ import * as Location from 'expo-location';
 const width = Dimensions.get("window").width;
 
 export default function Welcome() {
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const [locationServiceEnabled, setLocationServiceEnabled] = useState(false);
-    const [displayCurrentAddress, setDisplayCurrentAddress] = useState(
-        'loading...'
-    );
 
     useEffect(() => {
-        CheckIfLocationEnabled();
-        GetCurrentLocation();
-    }, []);
+        (async () => {
+            let enabled = await Location.hasServicesEnabledAsync();
 
-    const CheckIfLocationEnabled = async () => {
-        let enabled = await Location.hasServicesEnabledAsync();
-
-        if (!enabled) {
-            Alert.alert(
-                'Location Service not enabled',
-                'Please enable your location services to continue',
-                [{ text: 'OK' }],
-                { cancelable: false }
-            );
-        } else {
-            setLocationServiceEnabled(enabled);
-        }
-    };
-
-    const GetCurrentLocation = async () => {
-        let { status } = await Location.requestBackgroundPermissionsAsync();
-
-        if (status !== 'granted') {
-            Alert.alert(
-                'Permission not granted',
-                'Allow the app to use location service.',
-                [{ text: 'OK' }],
-                { cancelable: false }
-            );
-        }
-
-        let { coords } = await Location.getCurrentPositionAsync();
-
-        if (coords) {
-            const { latitude, longitude } = coords;
-            let response = await Location.reverseGeocodeAsync({
-                latitude,
-                longitude
-            });
-
-            for (let item of response) {
-                // change the address format as per your need
-                let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
-
-                setDisplayCurrentAddress(address);
+            if (!enabled) {
+                Alert.alert(
+                    'Location Service not enabled',
+                    'Please enable your location services to continue',
+                    [{ text: 'OK' }],
+                    { cancelable: false }
+                );
+            } else {
+                setLocationServiceEnabled(enabled);
             }
-        }
-    };
+
+            if (enabled) {
+
+                let { status } = await Location.requestForegroundPermissionsAsync();
+
+                if (status !== 'granted') {
+                    setErrorMsg('Permission to access location was denied');
+                    return;
+                }
+
+                let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
+
+                if (location) {
+                    const address = await Location.reverseGeocodeAsync({
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude
+                    });
+
+                    for (let item of address) {
+                        // change the address format as per your need
+                        let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
+                        setLocation(address);
+                    }
+                }
+            }
+        })();
+    }, []);
 
     const [fontsLoaded] = useFonts({
         Langar: require("../assets/fonts/Langar-Regular.ttf"),
@@ -103,7 +94,7 @@ export default function Welcome() {
                         Learn more about our collection of Hadeeth
                     </Text>
                     <Text>
-                        {displayCurrentAddress}
+                        {location ?? 'Loading...'}
                     </Text>
 
                     <Link style={styles.button} href="/login" className="shadow-2xl overflow-hidden rounded-3xl flex items-center justify-center py-3 px-5 w-[160px] bg-[#1EAB53] border-transparent">
