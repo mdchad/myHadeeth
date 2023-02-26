@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Alert, Image, Pressable, Text, TextInput, View } from "react-native";
 import { Link } from "expo-router";
 
@@ -10,7 +10,6 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth()
-  // const { authDispatch } = useContext(GlobalContext);
 
   async function signInWithEmail() {
     setLoading(true);
@@ -18,18 +17,17 @@ export default function SignIn() {
       email,
       password,
     });
-    // authDispatch(data.user.user_metadata);
 
     if (error) {
       Alert.alert(error.message);
+    } else {
+      setLoading(false);
+      signIn(data.user.user_metadata)
     }
-    setLoading(false);
-    signIn(data.user.user_metadata)
   }
 
   return (
     <View className="flex items-center justify-center px-4 mt-16 sm:mx-auto sm:w-full sm:max-w-md py-8 px-4 sm:rounded-lg sm:px-10 w-full">
-      {/*<Text className="text-5xl text-center font-bold mb-6">MyHadeeth</Text>*/}
       <View className="bg-[#F5EFD2] w-[115] h-[115] flex items-center justify-center rotate-[-43deg]">
         <Image
           source={require("../../assets/muslim.png")}
@@ -112,13 +110,6 @@ export default function SignIn() {
           <Text className="underline font-bold">Sign Up</Text>
         </Link>
       </View>
-      {/*<View>*/}
-      {/*  <Button*/}
-      {/*    title="Sign up"*/}
-      {/*    disabled={loading}*/}
-      {/*    onPress={() => signUpWithEmail()}*/}
-      {/*  />*/}
-      {/*</View>*/}
     </View>
   );
 }
