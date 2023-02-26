@@ -8,10 +8,12 @@ import {
     HeaderSearchBar,
     HeaderClassicSearchBar
 } from "react-native-header-search-bar";
+import { useAuth } from "./context/auth";
 
 const Search = () => {
     const router = useRouter();
     const [value, setValue] = useState('');
+    const { user } = useAuth()
 
     const countries = [
         { name: "Belgium", continent: "Europe" },
@@ -77,7 +79,11 @@ const Search = () => {
                     backgroundColor={"#EDEEC0"}
                     className="block"
                     firstTitle="Assalamualaikum"
-                    secondTitle="Replace with name"
+                    // firstTitleFontSize={16}
+                    firstTitleColor={"#000"}
+                    secondTitle={user.full_name}
+                    // secondTitleFontSize={18}
+                    secondTitleColor={"#000"}
                 />
                 {value.length > 0 && (
                     // <FlatList
