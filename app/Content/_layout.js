@@ -17,6 +17,13 @@ export default function Layout() {
                 >
                     <Tabs.Screen name="Hadeeth" />
                     <Tabs.Screen name="Prayers" />
+                    {/* hide auth from tab */}
+                    <Tabs.Screen
+                        name="(auth)/sign-in"
+                        options={{
+                            href: null,
+                        }}
+                    />
                 </Tabs>
             </Page>
         </View>

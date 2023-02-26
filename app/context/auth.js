@@ -26,7 +26,7 @@ function useProtectedRoute(user) {
       router.replace("/welcome");
     } else if (user && inAuthGroup) {
       // Redirect away from the sign-in page.
-      router.replace("/");
+      router.replace("/Content");
     }
   }, [user, segments]);
 }
