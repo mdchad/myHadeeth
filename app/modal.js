@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TextInput, FlatList, TouchableWithoutFeedback, 
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 import {
     HeaderSearchBar,
@@ -40,19 +40,6 @@ const Search = () => {
         { name: "Pakistan", continent: "Asia", description: "Pakistan, officially the Islamic Republic of Pakistan, is a country in South Asia. It is the world's fifth-most populous country with a population exceeding 212.2 million people, and has the world's second-largest Muslim population. Pakistan is the 33rd-largest country by area, spanning 881,913 square kilometres (340,509 square miles). It has a 1,046-kilometre (650-mile) coastline along the Arabian Sea and Gulf of Oman in the south and is bordered by India to the east, Afghanistan to the west, Iran to the southwest, and China in the far northeast." },
     ];
 
-    const getItem = (countries, index) => {
-        return countries[index];
-    };
-
-    const getItemCount = (countries) => {
-        return countries.length;
-    };
-
-    const renderItem = ({ item }) => {
-        const highlightedText = highlight(item.name, value);
-        return <Text>{highlightedText}</Text>;
-    };
-
     const highlightText = (text, query) => {
         if (!query.trim()) {
             return text;
@@ -77,46 +64,44 @@ const Search = () => {
     };
 
     return (
-
-        <View className="h-auto">
-            <HeaderSearchBar
-                onChangeText={value => setValue(value)}
-                searchBoxText="Search..."
-                backgroundColor={"#EDEEC0"}
-                className="block"
-                firstTitle="Assalamualaikum"
-                secondTitle="Replace with name"
-            />
+        <SafeAreaView className="flex-1 flex gap-5 bg-white">
+            <View className="flex flex-row gap-3 items-center px-3">
+                <TextInput
+                    className="bg-white p-3 flex-1 rounded-lg shadow"
+                    placeholder="Search..."
+                    value={value}
+                    onChangeText={(text) => setValue(text)}
+                />
+                <Link href="../" className="p-2">
+                    Cancel
+                </Link>
+            </View>
             {value.length > 0 && (
-                <SafeAreaView className="">
-                    <KeyboardAvoidingView
-                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                        style={styles.container}>
+                <FlatList
+                    className="px-5"
+                    data={countries.filter((country) =>
+                        country.name.toLowerCase().includes(value.toLowerCase()) || country.continent.toLowerCase().includes(value.toLowerCase()) || country.description.toLowerCase().includes(value.toLowerCase())
+                    )}
+                    renderItem={({ item }) => (
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <FlatList
-                                className="p-4 h-full"
-                                data={countries.filter((country) =>
-                                    country.name.toLowerCase().includes(value.toLowerCase())
-                                )}
-                                renderItem={({ item }) => (
-                                    <View className="">
-                                        <View className="flex flex-col">
-                                            <Text className="font-bold text-lg">{highlightText(item.name, value)}</Text>
-                                            <Text className="text-sm">{highlightText(item.continent, value)}</Text>
-                                        </View>
-                                        <View className="flex flex-col">
-                                            <Text className="text-sm">{highlightText(item.description, value)}</Text>
-                                        </View>
-                                    </View>
-                                )}
-                                keyExtractor={(item) => item.name}
-                                scrollEnabled={true}
-                            />
+                            <View className="mb-5">
+                                <Text className="font-bold text-lg">{highlightText(item.name, value)}</Text>
+                                <Text className="text-sm">{highlightText(item.continent, value)}</Text>
+                                <Text className="text-sm">{highlightText(item.description, value)}</Text>
+                            </View>
                         </TouchableWithoutFeedback>
-                    </KeyboardAvoidingView>
-                </SafeAreaView>
+                    )}
+                    keyExtractor={(item) => item.name}
+                    scrollEnabled={true}
+                    ListEmptyComponent={() => (
+                        <View className="flex-1 flex items-center justify-center">
+                            <Text className="text-lg">No results found.</Text>
+                            <Text className="text-sm"> Try something else instead?</Text>
+                        </View>
+                    )}
+                />
             )}
-        </View>
+        </SafeAreaView>
     )
 }
 

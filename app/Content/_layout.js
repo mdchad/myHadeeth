@@ -1,14 +1,16 @@
-import { Slot, Tabs } from "expo-router";
+import { Slot, Stack, Tabs } from "expo-router";
 import Search, { SearchBar } from "../search";
-import { Keyboard, Text, TouchableWithoutFeedback, View } from "react-native";
+import { Keyboard, SafeAreaView, Text, TouchableWithoutFeedback, View } from "react-native";
 import Page from '../components/page'
 
 export default function Layout() {
     return (
         <View className="flex-1 bg-white">
+            <SafeAreaView style={{}}>
 
-            <Search />
+                <Search />
 
+            </SafeAreaView>
             <Page>
                 <Tabs
                     screenOptions={{

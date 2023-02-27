@@ -102,6 +102,8 @@ export default function Welcome() {
                             Get Started
                         </Text>
                     </Link>
+
+                    <Link href="/modal">Present modal</Link>
                 </View>
             </ImageBackground>
         </SafeAreaView >
