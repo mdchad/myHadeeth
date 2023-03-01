@@ -2,13 +2,15 @@ import { View, Text, TouchableWithoutFeedback, Keyboard, Image, ScrollView, useW
 import React from 'react'
 import { Link } from 'expo-router'
 import { FontAwesome5, AntDesign } from '@expo/vector-icons';
+import { useAuth } from "../../context/auth";
 
 
 const Hadeeth = () => {
     const { height, width, scale, fontScale } = useWindowDimensions();
     const styles = makeStyles(fontScale);
+    const { user } = useAuth()
 
-    return (
+  return (
         <View className="flex-1 flex space-y-3 bg-white">
             <View className="bg-[#EDEEC0] flex flex-row justify-between items-center px-8 py-8 rounded-b-2xl rounded-bl-2xl shadow-sm">
                 <View>
@@ -16,7 +18,7 @@ const Hadeeth = () => {
                         Assalamualaikum,
                     </Text>
                     <Text className="font-bold uppercase">
-                        Name here
+                        {user.full_name}
                     </Text>
                 </View>
                 <Link href="/modal">

@@ -86,7 +86,7 @@ const Search = () => {
                 backgroundColor={"#EDEEC0"}
                 className="block"
                 firstTitle="Assalamualaikum"
-                secondTitle="Replace with name"
+                secondTitle={user.full_name}
             />
             {value.length > 0 && (
                 <SafeAreaView className="">
