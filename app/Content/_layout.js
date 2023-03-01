@@ -1,10 +1,13 @@
-import { Slot, Stack, Tabs } from "expo-router";
+import { Slot, Stack, Tabs, useRouter } from "expo-router";
 import Search, { SearchBar } from "../search";
 import { Image, Keyboard, SafeAreaView, Text, TouchableWithoutFeedback, View } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { supabase } from "@lib/supabase";
+import { useState, useEffect } from "react";
 
 export default function Layout() {
+
     return (
         <View className="flex-1">
             <Tabs
