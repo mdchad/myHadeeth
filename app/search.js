@@ -8,10 +8,12 @@ import {
     HeaderSearchBar,
     HeaderClassicSearchBar
 } from "react-native-header-search-bar";
+import { useAuth } from "./context/auth";
 
 const Search = () => {
     const router = useRouter();
     const [value, setValue] = useState('');
+    const { user } = useAuth()
 
     const countries = [
         { name: "Belgium", continent: "Europe", description: "حَدَّثَنَا يَحْيَى بْنُ يَحْيَى، وَأَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ، وَاللَّفْظُ لِيَحْيَى، قَالَ يَحْيَى: أَخْبَرَنَا، وقَالَ الْآخَرَانِ: حَدَّثَنَا ابْنُ عُيَيْنَةَ، عَنِ الزُّهْرِيِّ، عَنْ عَلِيِّ بْنِ حُسَيْنٍ، عَنْ عَمْرِو بْنِ عُثْمَانَ، عَنْ أُسَامَةَ بْنِ زَيْدٍ، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، قَالَ: لَا يَرِثُ الْمُسْلِمُ الْكَافِرَ، وَلَا يَرِثُ الْكَافِرُ الْمُسْلِمَ." },
@@ -77,7 +79,6 @@ const Search = () => {
     };
 
     return (
-
         <View className="h-auto">
             <HeaderSearchBar
                 onChangeText={value => setValue(value)}
