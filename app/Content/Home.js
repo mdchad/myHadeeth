@@ -4,6 +4,7 @@ import { Link } from 'expo-router'
 import { FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { useAuth } from "@context/auth";
 import Page from '@components/page'
+import Header from '@components/header';
 
 const Home = () => {
     const { height, width, scale, fontScale } = useWindowDimensions();
@@ -13,22 +14,7 @@ const Home = () => {
     return (
         <Page>
             <View className="flex-1 flex space-y-3 bg-white">
-                <View className="bg-[#EDEEC0] flex flex-row justify-between items-center px-8 py-8 rounded-b-2xl rounded-bl-2xl shadow-sm">
-                    <View>
-                        <Text className="mb-1">
-                            Assalamualaikum,
-                        </Text>
-                        <Text className="font-bold uppercase">
-                            {user.full_name}
-                        </Text>
-                    </View>
-                    <Link href="/modal">
-                        <View className="flex flex-row items-center">
-                            <AntDesign name="search1" size={16} color="black" />
-                            {/* <Image source={require("@assets/search.png")} style={{ width: 16, height: 20 }} /> */}
-                        </View>
-                    </Link>
-                </View>
+                <Header user={user.full_name} />
 
                 <ScrollView>
                     <View className="p-3 flex items-center space-y-10">
