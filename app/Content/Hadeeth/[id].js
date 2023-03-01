@@ -21,16 +21,17 @@ const chapter = [
 ];
 
 const hadeethContent = () => {
-    const { id } = useSearchParams();
+    const { title, id } = useSearchParams();
 
     return (
-        <View className="flex gap-3">
-            <View>
-                <Text>Hadeeth ID: {id}</Text>
-                <Text>Hadeeth Info</Text>
+        <View className="flex-1 flex gap-3 items-center">
+            <View className="flex justify-center items-center p-3">
+                <Text className="text-lg">{title}</Text>
+                <Link href="Content/Hadeeth">Back</Link>
             </View>
 
-            <View>
+            <View className="text-center flex space-y-3">
+                <Text className="text-lg">Hadeeth Info</Text>
                 <Text>Chapters:</Text>
                 <FlatList
                     data={chapter}
@@ -42,8 +43,6 @@ const hadeethContent = () => {
                     keyExtractor={item => item.id}
                 />
             </View>
-
-            <Link href="Content/Hadeeth">Back</Link>
         </View>
     )
 }
