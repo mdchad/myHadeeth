@@ -62,7 +62,7 @@ export default function Welcome() {
         return null;
     }
 
-    const image = require("./../assets/welcome-bg.png");
+    const image = require("@assets/welcome-bg.png");
 
     return (
         <SafeAreaView style={styles.container} >
