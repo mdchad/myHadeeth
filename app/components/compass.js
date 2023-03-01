@@ -127,10 +127,14 @@ export default App = () => {
                 degree => {
                     let rounded = Math.round(degree);
                     let finalDegree = rounded < 0 ? rounded + 360 : rounded;
+                    finalDegree -= 5;
+                    if (finalDegree < 0) {
+                        finalDegree += 360;
+                    }
                     setDegree(finalDegree);
 
-                    if (rounded === 0)
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    if (finalDegree === 0)
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
                 },
                 err => setError(err));
         }
@@ -192,12 +196,14 @@ export default App = () => {
 
                     <Col style={{ alignItems: 'center' }}>
 
-                        <Image source={require("./../../assets/compass_bg.png")} style={{
+                        <Image source={require("@assets/compass_bg.png")} style={{
                             height: width,
                             justifyContent: 'center',
                             alignItems: 'center',
                             resizeMode: 'contain',
-                            transform: [{ rotate: 360 - magnetometer + 'deg' }]
+                            transform: [{ rotate: 360 - magnetometer + 'deg' }],
+                            transition: 'transform ease-in-out',
+                            position: 'relative'
                         }} />
 
                     </Col>

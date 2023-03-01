@@ -1,15 +1,15 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import { Link } from 'expo-router'
-import SafeView from '../components/safeView'
+import Page from '../components/page'
 
 const Home = () => {
-  return (
-    <SafeView>
-      <Text>Home</Text>
-      <Link href='/Pages/search'>search page</Link>
-    </SafeView>
-  )
+    return (
+        <Page>
+            <Text>Home</Text>
+            <Link href='/Pages/search'>search page</Link>
+        </Page>
+    )
 }
 
 export default Home

@@ -1,15 +1,15 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import SafeView from './components/safeView'
+import Page from './components/page'
 import { Link } from 'expo-router'
 
 const login = () => {
 
     return (
-        <SafeView>
+        <Page>
             <Text>Login</Text>
             <Link href="/Content">Content</Link>
-        </SafeView>
+        </Page>
     )
 }
 

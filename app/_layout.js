@@ -1,14 +1,23 @@
-// import { Stack } from "expo-router";
-// import { StatusBar } from 'expo-status-bar';
+import { Stack } from "expo-router";
+import { StatusBar } from 'expo-status-bar';
+import { Text } from "react-native";
 
-import { Slot } from "expo-router";
-import { Provider } from "./context/auth";
-
-export default function Root() {
-  return (
-    // Setup the auth context and render our layout inside of it.
-    <Provider>
-      <Slot />
-    </Provider>
-  );
+export default function Layout() {
+    return (
+        <>
+            <Stack screenOptions={{
+                headerShown: false,
+                gestureEnabled: false
+            }}>
+                <Stack.Screen name="Content" options={{ headerShown: false }} />
+                <Stack.Screen
+                    name="modal"
+                    options={{
+                        presentation: "fullScreenModal",
+                    }}
+                />
+            </Stack>
+            <StatusBar style="auto" />
+        </>
+    )
 }
