@@ -5,11 +5,15 @@ import { StatusBar } from 'expo-status-bar';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { supabase } from "@lib/supabase";
 import { useState, useEffect } from "react";
+import { useAuth } from "@context/auth";
+import Header from '@components/header';
 
 export default function Layout() {
+    const { user } = useAuth()
 
     return (
         <View className="flex-1">
+            <Header user={user.full_name} />
             <Tabs
                 screenOptions={{
                     headerShown: false,
