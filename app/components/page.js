@@ -6,7 +6,7 @@ import React from 'react'
 
 const page = ({ children }) => {
     return (
-        <SafeAreaView className="flex-1 bg-[#EDEEC0]">
+        <SafeAreaView className="flex-1 bg-white">
             {children}
         </SafeAreaView>
     )
