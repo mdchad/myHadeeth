@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableWithoutFeedback, Keyboard, ScrollView, VirtualizedList, Button, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, TextInput, FlatList, TouchableWithoutFeedback, Keyboard, ScrollView, VirtualizedList, Button, KeyboardAvoidingView, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -66,12 +66,21 @@ const Search = () => {
     return (
         <SafeAreaView className="flex-1 flex gap-5 bg-white">
             <View className="flex flex-row gap-3 items-center px-3">
-                <TextInput
-                    className="bg-white p-3 flex-1 rounded-lg shadow"
-                    placeholder="Search..."
-                    value={value}
-                    onChangeText={(text) => setValue(text)}
-                />
+                <View className="flex-1 relative flex items-center justify-center">
+                    <TextInput
+                        className="bg-white p-3 flex-1 rounded-lg shadow w-full"
+                        placeholder="Search..."
+                        value={value}
+                        onChangeText={(text) => setValue(text)}
+                    />
+                    {value.length > 0 && (
+                        <View className="absolute right-0 top-0 bottom-0 flex justify-center pr-2">
+                            <Pressable onPress={() => { setValue('') }}>
+                                <MaterialIcons name="cancel" size={16} color="black" />
+                            </Pressable>
+                        </View>
+                    )}
+                </View>
                 <Link href="../" className="p-2">
                     Cancel
                 </Link>
