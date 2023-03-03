@@ -7,6 +7,13 @@ export default function Layout() {
         <Page>
             <Stack screenOptions={{ headerShown: false }}>
                 <Stack.Screen
+                    name="index"
+                    options={{
+                        // Hide the header for all other routes.
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
                     name="modal"
                     options={{
                         presentation: "fullScreenModal",

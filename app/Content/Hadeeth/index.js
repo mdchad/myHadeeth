@@ -58,7 +58,7 @@ const Hadeeth = () => {
 
     return (
         <View className="flex-1 flex space-y-3 bg-white">
-            <Header user={user.full_name} />
+            {/* <Header user={user.full_name} /> */}
 
             {/* <ScrollView> */}
             <View className="flex-1">
