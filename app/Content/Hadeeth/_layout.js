@@ -5,7 +5,14 @@ import Page from '@components/page'
 export default function Layout() {
     return (
         <Page>
-            <Stack screenOptions={{ headerShown: false }} />
+            <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen
+                    name="modal"
+                    options={{
+                        presentation: "fullScreenModal",
+                    }}
+                />
+            </Stack>
         </Page>
     )
 }
