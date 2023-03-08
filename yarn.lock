@@ -1612,7 +1612,7 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-compose-refs" "1.0.0"
 
-"@react-native-async-storage/async-storage@^1.17.11":
+"@react-native-async-storage/async-storage@1.17.11":
   version "1.17.11"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz#7ec329c1b9f610e344602e806b04d7c928a2341d"
   integrity sha512-bzs45n5HNcDq6mxXnSsOHysZWn1SbbebNxldBXCQs8dSvF8Aor9KCdpm+TpnnGweK3R6diqsT8lFhX77VX0NFw==
@@ -2357,11 +2357,6 @@ babel-plugin-syntax-trailing-function-commas@^7.0.0-beta.0:
   version "7.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-7.0.0-beta.0.tgz#aa213c1435e2bffeb6fca842287ef534ad05d5cf"
   integrity sha512-Xj9XuRuz3nTSbaTXWv3itLOcxyF4oPD8douBBmj7U9BBC6nEBYfyOJYQMf/8PJAFotC62UY5dFfIGEPr7WswzQ==
-
-babel-plugin-transform-inline-environment-variables@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-inline-environment-variables/-/babel-plugin-transform-inline-environment-variables-0.4.4.tgz#974245008b3cbbd646bd81707af147aea3acca43"
-  integrity sha512-bJILBtn5a11SmtR2j/3mBOjX4K3weC6cq+NNZ7hG22wCAqpc3qtj/iN7dSe9HDiS46lgp1nHsQgeYrea/RUe+g==
 
 babel-preset-expo@~9.3.0:
   version "9.3.0"
@@ -6391,7 +6386,7 @@ react-native-easy-grid@^0.2.2:
   dependencies:
     lodash "^4.17.15"
 
-react-native-gesture-handler@^2.9.0:
+react-native-gesture-handler@~2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.9.0.tgz#2f63812e523c646f25b9ad660fc6f75948e51241"
   integrity sha512-a0BcH3Qb1tgVqUutc6d3VuWQkI1AM3+fJx8dkxzZs9t06qA27QgURYFoklpabuWpsUTzuKRpxleykp25E8m7tg==
@@ -6470,7 +6465,7 @@ react-native-vector-icons@^9.2.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native-web@~0.18.7:
+react-native-web@~0.18.11:
   version "0.18.12"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.18.12.tgz#d4bb3a783ece2514ba0508d7805b09c0a98f5a8e"
   integrity sha512-fboP7yqobJ8InSr4fP+bQ3scOtSQtUoPcR+HWasH8b/fk/RO+mWcJs/8n+lewy9WTZc2D68ha7VwRDviUshEWA==

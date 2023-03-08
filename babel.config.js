@@ -4,7 +4,6 @@ module.exports = function (api) {
     presets: ["babel-preset-expo"],
     plugins: [
       "nativewind/babel",
-      // 'transform-inline-environment-variables', ["module:react-native-dotenv"],
       ["module:react-native-dotenv", {
         "moduleName": "@env",
         "path": ".env",
@@ -13,7 +12,6 @@ module.exports = function (api) {
         "safe": false,
         "allowUndefined": true
       }],
-      "@babel/plugin-proposal-export-namespace-from",
       "react-native-reanimated/plugin",
       require.resolve("expo-router/babel"),
       ["module-resolver",

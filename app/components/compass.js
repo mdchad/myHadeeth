@@ -9,7 +9,7 @@ import { useSegments } from 'expo-router';
 const { height, width } = Dimensions.get('window');
 let _Mecca = { latitude: 21.42252, longitude: 39.82621 };
 
-export default App = () => {
+const compass = () => {
     const [subscription, setSubscription] = useState(null);
     const [magnetometer, setMagnetometer] = useState(0);
 
@@ -242,3 +242,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 0
     }
 });
+
+export default compass

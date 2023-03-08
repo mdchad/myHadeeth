@@ -20,9 +20,12 @@ export default function SignIn() {
 
     if (error) {
       Alert.alert(error.message);
+      setLoading(false);
     } else {
       setLoading(false);
-      signIn(data.user.user_metadata)
+      if (data.user) {
+        signIn(data.user.user_metadata)
+      }
     }
   }
 

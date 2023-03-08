@@ -11,7 +11,6 @@ export function useAuth() {
 // This hook will protect the route access based on user authentication.
 function useProtectedRoute(user) {
   const segments = useSegments();
-  console.log(segments)
   const router = useRouter();
 
   React.useEffect(() => {
