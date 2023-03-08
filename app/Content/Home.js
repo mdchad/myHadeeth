@@ -4,7 +4,7 @@ import { Link } from 'expo-router'
 import { FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { useAuth } from "@context/auth";
 import Page from '@components/page'
-import Header from '@components/header';
+// import Header from '@components/header';
 
 const Home = () => {
     const { height, width, scale, fontScale } = useWindowDimensions();
@@ -13,7 +13,7 @@ const Home = () => {
 
     return (
         <Page>
-            <Header user={user.full_name} />
+            {/* <Header user={user.full_name} /> */}
             <View className="flex-1 flex space-y-3 bg-white">
 
                 <ScrollView>

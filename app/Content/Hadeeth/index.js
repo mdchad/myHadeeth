@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'expo-router'
 import { FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { useAuth } from "@context/auth";
-import Header from '@components/header';
+// import Header from '@components/header';
 
 const DATA = [
     {

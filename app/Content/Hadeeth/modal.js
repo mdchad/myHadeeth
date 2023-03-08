@@ -4,11 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Link, useRouter } from "expo-router";
 
-import {
-    HeaderSearchBar,
-    HeaderClassicSearchBar
-} from "react-native-header-search-bar";
-
 const Search = () => {
     const router = useRouter();
     const [value, setValue] = useState('');

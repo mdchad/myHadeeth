@@ -3,11 +3,6 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
-
-import {
-    HeaderSearchBar,
-    HeaderClassicSearchBar
-} from "react-native-header-search-bar";
 import { useAuth } from "./context/auth";
 
 const Search = () => {
@@ -80,14 +75,14 @@ const Search = () => {
 
     return (
         <View className="h-auto">
-            <HeaderSearchBar
+            {/* <HeaderSearchBar
                 onChangeText={value => setValue(value)}
                 searchBoxText="Search..."
                 backgroundColor={"#EDEEC0"}
                 className="block"
                 firstTitle="Assalamualaikum"
                 secondTitle={user.full_name}
-            />
+            /> */}
             {value.length > 0 && (
                 <SafeAreaView className="">
                     <KeyboardAvoidingView
